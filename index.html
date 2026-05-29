@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rede Credenciada SulAmérica</title>
+<style>
+body{font-family:Arial,Helvetica,sans-serif;background:#f4f7fb;color:#1f2937;margin:0;padding:24px}
+.container{max-width:1400px;margin:0 auto;background:#fff;border:1px solid #d9e2ec;border-radius:12px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,.06)}
+.header{background:#173B66;color:#fff;padding:20px 24px}
+h1{margin:0;font-size:22px}
+.sub{margin-top:6px;font-size:14px;opacity:.92}
+.tools{padding:14px 24px;background:#eef5fc;border-bottom:1px solid #d9e2ec;font-size:14px;line-height:1.5}
+.search{width:100%;padding:12px 14px;border:1px solid #cbd5e1;border-radius:10px;font-size:15px;margin:0 0 10px 0}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.badge{display:inline-block;padding:6px 10px;border:1px solid #cbd5e1;border-radius:999px;background:#fff;cursor:pointer;user-select:none}
+.badge.active{background:#173B66;color:#fff;border-color:#173B66}
+.table-wrap{overflow:auto;max-height:78vh}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{border:1px solid #cbd5e1;padding:8px 10px;vertical-align:top}
+th{position:sticky;top:0;background:#2B6CB0;color:#fff;text-align:center;z-index:2}
+tbody tr.region td{background:#DDECF9;font-weight:700;color:#173B66;position:sticky;top:38px;z-index:1}
+tbody tr:nth-child(even):not(.region) td{background:#f8fbff}
+.good{color:#0B6E2F;font-weight:700;text-align:center}
+.bad{color:#9ca3af;text-align:center}
+.hidden{display:none}
+.small{font-size:12px;color:#4b5563}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+<h1>Rede Credenciada SulAmérica</h1>
+<div class="sub">Tabela filtrável para consulta da rede credenciada. Unidades sem cobertura foram removidas.</div>
+</div>
+<div class="tools">
+<input id="q" class="search" type="search" placeholder="Buscar hospital, laboratório ou região...">
+<div class="small">Dica: você pode clicar nas etiquetas para filtrar por região.</div>
+<div id="chips" class="filters"></div>
+</div>
+<div class="table-wrap">
+<table id="t">
+<thead><tr><th>Hospital / Laboratório</th><th>Direto Nacional (E)</th></tr></thead>
+<tbody>
+<tr class="region" data-region="Centro - SP"><td colspan="2">Centro - SP</td></tr>
+<tr data-region="Centro - SP"><td>Hospital BP</td><td class="good">H, PS</td></tr>
+<tr data-region="Centro - SP"><td>Leforte - Liberdade</td><td class="good">H, PS</td></tr>
+<tr class="region" data-region="Zona Leste - SP"><td colspan="2">Zona Leste - SP</td></tr>
+<tr data-region="Zona Leste - SP"><td>Cema - ZL Belém</td><td class="good">H, PS¹</td></tr>
+<tr data-region="Zona Leste - SP"><td>H Central Leste</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Zona Leste - SP"><td>H Central Tatuapé</td><td class="good">H, PSA</td></tr>
+<tr data-region="Zona Leste - SP"><td>H Villa Lobos</td><td class="good">H, PSA</td></tr>
+<tr data-region="Zona Leste - SP"><td>IBCC</td><td class="good">H, PSA</td></tr>
+<tr data-region="Zona Leste - SP"><td>Sta Marcelina</td><td class="good">H, PS</td></tr>
+<tr class="region" data-region="Zona Norte - SP"><td colspan="2">Zona Norte - SP</td></tr>
+<tr data-region="Zona Norte - SP"><td>Nipo Brasileiro</td><td class="good">H, M, PS</td></tr>
+<tr class="region" data-region="Zona Oeste - SP"><td colspan="2">Zona Oeste - SP</td></tr>
+<tr data-region="Zona Oeste - SP"><td>Albert Sabin - Lapa</td><td class="good">H, PSA</td></tr>
+<tr data-region="Zona Oeste - SP"><td>Clínicas FMUSP - Instituto Central</td><td class="good">H, PS¹</td></tr>
+<tr data-region="Zona Oeste - SP"><td>Sta Isabel</td><td class="good">H, PSA</td></tr>
+<tr data-region="Zona Oeste - SP"><td>Leforte - Morumbi</td><td class="good">H, PS</td></tr>
+<tr class="region" data-region="Zona Sul - SP"><td colspan="2">Zona Sul - SP</td></tr>
+<tr data-region="Zona Sul - SP"><td>Blanc</td><td class="good">H</td></tr>
+<tr data-region="Zona Sul - SP"><td>Clín Maia (Psiquiatria) - Vila Mariana</td><td class="good">H</td></tr>
+<tr data-region="Zona Sul - SP"><td>Cto de Tratamento Bezerra de Menezes - SP</td><td class="good">H¹</td></tr>
+<tr data-region="Zona Sul - SP"><td>Dom Alvarenga</td><td class="good">H, PSA</td></tr>
+<tr data-region="Zona Sul - SP"><td>GRAACC</td><td class="good">H</td></tr>
+<tr data-region="Zona Sul - SP"><td>H Central Sul</td><td class="good">H, PSA</td></tr>
+<tr data-region="Zona Sul - SP"><td>H da Criança - Jabaquara</td><td class="good">H, PSP</td></tr>
+<tr data-region="Zona Sul - SP"><td>H e Mat São Luíz - Jabaquara</td><td class="good">H, PSA</td></tr>
+<tr data-region="Zona Sul - SP"><td>H e Mat Sepaco</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Zona Sul - SP"><td>H e Mat Sta Maria</td><td class="good">PS¹</td></tr>
+<tr data-region="Zona Sul - SP"><td>Rim e Hipertensão</td><td class="good">H</td></tr>
+<tr data-region="Zona Sul - SP"><td>Ruben Berta</td><td class="good">H, PS¹</td></tr>
+<tr data-region="Zona Sul - SP"><td>Sta Isabella</td><td class="good">PSP</td></tr>
+<tr data-region="Zona Sul - SP"><td>Sta Rita</td><td class="good">H, PSA</td></tr>
+<tr data-region="Zona Sul - SP"><td>Sta Paula</td><td class="good">H, PSA</td></tr>
+<tr class="region" data-region="ABCD - SP"><td colspan="2">ABCD - SP</td></tr>
+<tr data-region="ABCD - SP"><td>Cto de Tratamento Bezerra de Menezes - SBC - São Bernardo do Campo</td><td class="good">H¹</td></tr>
+<tr data-region="ABCD - SP"><td>H Assunção - São Bernardo do Campo</td><td class="good">H, PS</td></tr>
+<tr data-region="ABCD - SP"><td>H Bartira - Santo André</td><td class="good">H, PS</td></tr>
+<tr data-region="ABCD - SP"><td>H Benef Portuguesa São Caetano - São Caetano do Sul</td><td class="good">H, M, PS</td></tr>
+<tr data-region="ABCD - SP"><td>H Brasil Mauá - Mauá</td><td class="good">H, PS</td></tr>
+<tr data-region="ABCD - SP"><td>H e M Brasil - Santo André</td><td class="good">H, M, PS¹</td></tr>
+<tr data-region="ABCD - SP"><td>H e M Ribeirão Pires - Ribeirão Pires</td><td class="good">H, M, PS</td></tr>
+<tr data-region="ABCD - SP"><td>H Ifor - São Bernardo do Campo</td><td class="good">H</td></tr>
+<tr data-region="ABCD - SP"><td>Sta Casa - Mauá</td><td class="good">PS</td></tr>
+<tr data-region="ABCD - SP"><td>Sta Marcelina - São Bernardo do Campo</td><td class="good">H, PSA</td></tr>
+<tr class="region" data-region="Grande SP - Leste - SP"><td colspan="2">Grande SP - Leste - SP</td></tr>
+<tr data-region="Grande SP - Leste - SP"><td>Clín Saint Nicholas - Suzano</td><td class="good">PA</td></tr>
+<tr data-region="Grande SP - Leste - SP"><td>CM São Lucas - Itaquaquecetuba</td><td class="good">PA</td></tr>
+<tr data-region="Grande SP - Leste - SP"><td>H e Mat Mogi Mater - Mogi das Cruzes</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Grande SP - Leste - SP"><td>H Saint Nicholas - Suzano</td><td class="good">H, PS</td></tr>
+<tr data-region="Grande SP - Leste - SP"><td>H Sta Maria de Suzano - Suzano</td><td class="good">H, M, PS¹</td></tr>
+<tr data-region="Grande SP - Leste - SP"><td>H Urológico Mogi - Mogi das Cruzes</td><td class="good">H¹</td></tr>
+<tr data-region="Grande SP - Leste - SP"><td>Ipiranga (AMA) - Arujá</td><td class="good">H, M, PS¹</td></tr>
+<tr data-region="Grande SP - Leste - SP"><td>Sta Casa - Guararema</td><td class="good">H, M, PSA</td></tr>
+<tr data-region="Grande SP - Leste - SP"><td>H Ipiranga - Mogi das Cruzes - Mogi das Cruzes</td><td class="good">H, PSA</td></tr>
+<tr class="region" data-region="Grande SP - Norte - SP"><td colspan="2">Grande SP - Norte - SP</td></tr>
+<tr data-region="Grande SP - Norte - SP"><td>H e Mat Guarulhos - Guarulhos</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Grande SP - Norte - SP"><td>H e Mat Paulo Sacramento - Cajamar</td><td class="good">PS¹</td></tr>
+<tr data-region="Grande SP - Norte - SP"><td>Sta Casa - Santa Isabel</td><td class="good">H, PSA</td></tr>
+<tr data-region="Grande SP - Norte - SP"><td>H Clín Caieiras - Caieiras</td><td class="good">H, PSA</td></tr>
+<tr class="region" data-region="Grande SP - Oeste - SP"><td colspan="2">Grande SP - Oeste - SP</td></tr>
+<tr data-region="Grande SP - Oeste - SP"><td>Central Oeste - Carapicuíba</td><td class="good">H, PS</td></tr>
+<tr data-region="Grande SP - Oeste - SP"><td>H e M São Luíz - Osasco - Osasco</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Grande SP - Oeste - SP"><td>H Yes - Itapevi</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Grande SP - Oeste - SP"><td>Hospitalis - Unid Barueri - Barueri</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Grande SP - Oeste - SP"><td>Projeto Criança - Osasco</td><td class="good">PSP</td></tr>
+<tr class="region" data-region="Grande SP - Sul - SP"><td colspan="2">Grande SP - Sul - SP</td></tr>
+<tr data-region="Grande SP - Sul - SP"><td>Clín Maia (Psiquiatria) - Bela Vista - Itapecerica da Serra</td><td class="good">H¹</td></tr>
+<tr data-region="Grande SP - Sul - SP"><td>Clín Maia (Psiquiatria) - Embu das Artes - Embu das Artes</td><td class="good">H¹</td></tr>
+<tr data-region="Grande SP - Sul - SP"><td>Clín Maia (Psiquiatria) - Itapecerica da Serra - Itapecerica da Serra</td><td class="good">H¹</td></tr>
+<tr data-region="Grande SP - Sul - SP"><td>H Family - Taboão da Serra</td><td class="good">H, M, PS¹</td></tr>
+<tr data-region="Grande SP - Sul - SP"><td>H São Francisco - Cotia - Cotia</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Grande SP - Sul - SP"><td>Sta Mônica - Itapecerica da Serra</td><td class="good">H¹</td></tr>
+<tr class="region" data-region="Litoral - SP"><td colspan="2">Litoral - SP</td></tr>
+<tr data-region="Litoral - SP"><td>Amorsaúde - Caraguatatuba</td><td class="good">LAB</td></tr>
+<tr data-region="Litoral - SP"><td>Casa de Saúde - Guarujá</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Litoral - SP"><td>Casa de Saúde - Praia Grande</td><td class="good">H, PS</td></tr>
+<tr data-region="Litoral - SP"><td>H de Clín de São Sebastião - São Sebastião</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Litoral - SP"><td>H Infantil do Gonzaga - Santos</td><td class="good">H, PSP</td></tr>
+<tr data-region="Litoral - SP"><td>H São José - São Vicente</td><td class="good">H, PS</td></tr>
+<tr data-region="Litoral - SP"><td>H Stella Maris - Caraguatatuba</td><td class="good">H, M, PS¹</td></tr>
+<tr data-region="Litoral - SP"><td>Sta Casa - Santos</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Litoral - SP"><td>Sta Casa - Ubatuba</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Litoral - SP"><td>H Ana Costa - Cubatão - Cubatão</td><td class="good">H, PS</td></tr>
+<tr data-region="Litoral - SP"><td>H Ana Costa - Dr Aloísio F - Santos</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Litoral - SP"><td>H Ana Costa - Guarujá - Guarujá</td><td class="good">PS</td></tr>
+<tr data-region="Litoral - SP"><td>H Ana Costa - Praia Grande - Praia Grande</td><td class="good">H¹, PS</td></tr>
+<tr data-region="Litoral - SP"><td>H Ana Costa - São Vicente - São Vicente</td><td class="good">H, PS</td></tr>
+<tr class="region" data-region="Interior - SP"><td colspan="2">Interior - SP</td></tr>
+<tr data-region="Interior - SP"><td>Adolfo Bezerra de Menezes - São José do Rio Preto</td><td class="good">H¹</td></tr>
+<tr data-region="Interior - SP"><td>Amorsaúde - Bragança Paulista</td><td class="good">LAB</td></tr>
+<tr data-region="Interior - SP"><td>Amorsaúde - Cosmópolis</td><td class="good">LAB</td></tr>
+<tr data-region="Interior - SP"><td>Antoninho da Rocha Marmo - São José dos Campos</td><td class="good">H, M, PSA</td></tr>
+<tr data-region="Interior - SP"><td>Assoc Assist Adolpho Bezerra de Menezes - Presidente Prudente</td><td class="good">H¹</td></tr>
+<tr data-region="Interior - SP"><td>Centro Médico Campinas - Campinas</td><td class="good">H, PS</td></tr>
+<tr data-region="Interior - SP"><td>Clin Sto Antonio - Cruzeiro</td><td class="good">H¹</td></tr>
+<tr data-region="Interior - SP"><td>CM Vera Cruz São Camilo - Indaiatuba</td><td class="good">PA</td></tr>
+<tr data-region="Interior - SP"><td>Cto de Traumatologia Ortopédico - Indaiatuba</td><td class="good">H¹, PA</td></tr>
+<tr data-region="Interior - SP"><td>Estância Morro Grande - Ibiúna</td><td class="good">H¹</td></tr>
+<tr data-region="Interior - SP"><td>GPACI - Sorocaba</td><td class="good">H, PSP</td></tr>
+<tr data-region="Interior - SP"><td>Grupo R Mattos - Caçapava - Caçapava</td><td class="good">H¹</td></tr>
+<tr data-region="Interior - SP"><td>H Alvorada - Jacareí</td><td class="good">H, M, PSA</td></tr>
+<tr data-region="Interior - SP"><td>H Andrade e Montanhez - São José do Rio Preto</td><td class="good">H¹</td></tr>
+<tr data-region="Interior - SP"><td>H Bauru - Bauru</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>H Benef Portuguesa de Amparo - Amparo</td><td class="good">H, PSA</td></tr>
+<tr data-region="Interior - SP"><td>H Benef Portuguesa de Bauru - Bauru</td><td class="good">H, PS</td></tr>
+<tr data-region="Interior - SP"><td>H Boldrini - Campinas</td><td class="good">H</td></tr>
+<tr data-region="Interior - SP"><td>H Clín Antônio Afonso - Jacareí</td><td class="good">H, M, PSA</td></tr>
+<tr data-region="Interior - SP"><td>H das Clínicas - Fernandópolis</td><td class="good">H</td></tr>
+<tr data-region="Interior - SP"><td>H de Base - São José do Rio Preto</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>H de Caridade - Vargem Grande do Sul</td><td class="good">H, M, PSA</td></tr>
+<tr data-region="Interior - SP"><td>H de Franca - Franca</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>H de Olhos do Vale - São José dos Campos</td><td class="good">H</td></tr>
+<tr data-region="Interior - SP"><td>H de Olhos Oeste Paulista - Assis</td><td class="good">H¹</td></tr>
+<tr data-region="Interior - SP"><td>H Dia Oftalmológico - Jundiaí</td><td class="good">H¹, PS¹</td></tr>
+<tr data-region="Interior - SP"><td>H e M Policlin Taubaté - Taubaté</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>H e Mat de Assis - Assis</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>H e Mat Frei Galvão - Guaratinguetá</td><td class="good">H, PSA</td></tr>
+<tr data-region="Interior - SP"><td>H e Mat Galileo - Valinhos</td><td class="good">H, PSA</td></tr>
+<tr data-region="Interior - SP"><td>H e Mat São Joaquim - Franca</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>H e Mat São José - Registro</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>H e Mat São Lucas - Lins</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>H Espírita de Marília - Marília</td><td class="good">H¹</td></tr>
+<tr data-region="Interior - SP"><td>H Famesp Botucatu - Botucatu</td><td class="good">H</td></tr>
+<tr data-region="Interior - SP"><td>H Fundação e Mat Sinha Junqueira - Ribeirão Preto</td><td class="good">H, M, PS¹</td></tr>
+<tr data-region="Interior - SP"><td>H GACC - São José dos Campos</td><td class="good">H¹, PSP</td></tr>
+<tr data-region="Interior - SP"><td>H Geral e Mat Sta Tereza - Campinas</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>H Iamada - Presidente Prudente</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>H Infantil Prontil - São José dos Campos</td><td class="good">H, PSP</td></tr>
+<tr data-region="Interior - SP"><td>H Itatiba - Itatiba</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>H Jarinu - Jarinu</td><td class="good">PSA</td></tr>
+<tr data-region="Interior - SP"><td>H Misericórdia de Altinópolis - Altinópolis</td><td class="good">H, M, PSA</td></tr>
+<tr data-region="Interior - SP"><td>H Modelo Sorocaba - Sorocaba</td><td class="good">H, M, PS¹</td></tr>
+<tr data-region="Interior - SP"><td>H N S da Piedade - Lençóis Paulista</td><td class="good">H, M</td></tr>
+<tr data-region="Interior - SP"><td>H Novo Atibaia - Atibaia</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>H Oftalmológico de Sorocaba - Sorocaba</td><td class="good">H¹, PS¹</td></tr>
+<tr data-region="Interior - SP"><td>H Oftalmológico Ribeirão Preto - Ribeirão Preto</td><td class="good">H¹</td></tr>
+<tr data-region="Interior - SP"><td>H Padre Albino - Catanduva</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>H Paulo Sacramento - Jundiaí</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>H Paulo Sacramento - Várzea Paulista</td><td class="good">H¹, PS¹</td></tr>
+<tr data-region="Interior - SP"><td>H Policlin - SJC - São José dos Campos</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>H Pro Saúde Geral Araras - Araras</td><td class="good">H, M, PSA</td></tr>
+<tr data-region="Interior - SP"><td>H Psiquiátrico Itupeva - Itupeva</td><td class="good">H¹</td></tr>
+<tr data-region="Interior - SP"><td>H Regional de Teodoro Sampaio - Teodoro Sampaio</td><td class="good">H, M, PSA</td></tr>
+<tr data-region="Interior - SP"><td>H S. Marcos da Sama - Morro Agudo</td><td class="good">H, M, PSA</td></tr>
+<tr data-region="Interior - SP"><td>H Samaritano Hortolândia - Hortolândia</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>H São Camilo - Campos do Jordão</td><td class="good">H, PSA</td></tr>
+<tr data-region="Interior - SP"><td>H São Francisco - Ribeirão Preto</td><td class="good">H, PSA</td></tr>
+<tr data-region="Interior - SP"><td>H São Francisco - São Roque - São Roque</td><td class="good">H, M, PSA</td></tr>
+<tr data-region="Interior - SP"><td>H São Francisco - Unid Netto Campello - Sertãozinho</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>H São João - Registro</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>H São Jorge - Ituverava</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>H São Lucas - Americana - Americana</td><td class="good">H, PSA</td></tr>
+<tr data-region="Interior - SP"><td>H São Luiz - Boituva</td><td class="good">H, M, PA</td></tr>
+<tr data-region="Interior - SP"><td>H São Marcos - Jaboticabal</td><td class="good">H</td></tr>
+<tr data-region="Interior - SP"><td>H Sta Barbara D´Oeste - Santa Barbara D`Oeste</td><td class="good">H, M</td></tr>
+<tr data-region="Interior - SP"><td>H Sta Elisa - Jundiaí</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>H Sta Helena - São José do Rio Preto</td><td class="good">H, PS</td></tr>
+<tr data-region="Interior - SP"><td>H Sta Ignês - Indaiatuba - Indaiatuba</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>H Sta Lucinda - Sorocaba</td><td class="good">H</td></tr>
+<tr data-region="Interior - SP"><td>H Unimar - Marília</td><td class="good">H, M, PSA</td></tr>
+<tr data-region="Interior - SP"><td>H Unimed - Presidente Prudente</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>H Unimed Samaritano - Bebedouro - Bebedouro</td><td class="good">H, M, PSP</td></tr>
+<tr data-region="Interior - SP"><td>H Unimed Sta Casa - Bebedouro - Bebedouro</td><td class="good">H, PSA</td></tr>
+<tr data-region="Interior - SP"><td>H Universitário HUSF - Bragança Paulista</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>HAOC - Indaiatuba</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>HFC - Piracicaba</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Hospital Hi - Ibitinga</td><td class="good">H, M, PA</td></tr>
+<tr data-region="Interior - SP"><td>IAM - Assis</td><td class="good">H, M</td></tr>
+<tr data-region="Interior - SP"><td>Imaculada Conceição - Ribeirão Preto</td><td class="good">H, PSA</td></tr>
+<tr data-region="Interior - SP"><td>Inst Bairral Psiquiatria - Itapira</td><td class="good">H¹</td></tr>
+<tr data-region="Interior - SP"><td>Inst Chui de Psiquiatria - São José dos Campos</td><td class="good">H¹</td></tr>
+<tr data-region="Interior - SP"><td>Inst Penido Burnier - Campinas</td><td class="good">H¹</td></tr>
+<tr data-region="Interior - SP"><td>Inst Pro Visão - Americana</td><td class="good">H</td></tr>
+<tr data-region="Interior - SP"><td>Instituto Indaiá - IRPSI - Indaiatuba</td><td class="good">H¹</td></tr>
+<tr data-region="Interior - SP"><td>Mat Gota de Leite - Araraquara</td><td class="good">H, M, PS¹</td></tr>
+<tr data-region="Interior - SP"><td>Medical de Limeira - Limeira</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Norden Hospital - São Carlos</td><td class="good">H, PA, PS</td></tr>
+<tr data-region="Interior - SP"><td>PAAP - Ribeirão Shopping - Ribeirão Preto - SP - Ribeirão Preto</td><td class="good">PA</td></tr>
+<tr data-region="Interior - SP"><td>São Francisco Assis - Jacareí</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>São Francisco de Americana - Americana</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Araraquara</td><td class="good">H, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Assis</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Bragança Paulista</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Capivari</td><td class="good">H, M, PSA</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Cerquilho</td><td class="good">H, M, PSA</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Cosmópolis</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Cravinhos</td><td class="good">H, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Cruzeiro</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Descalvado</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Fernandópolis</td><td class="good">H, PSA</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Guará</td><td class="good">H, M, PSA</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Guaratinguetá</td><td class="good">H</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Itapira</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Itápolis</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Itararé</td><td class="good">H, M</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Itatiba</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Ituverava</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Jaú</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - José Bonifácio</td><td class="good">H, M, PSA</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Laranjal Paulista</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Limeira</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Lins</td><td class="good">H, PSA</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Lorena</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Louveira</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Lucélia</td><td class="good">H, PSA</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Marília</td><td class="good">H, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Martinópolis</td><td class="good">H, PSA</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Matão</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Monte Alto</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Osvaldo Cruz</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Pederneiras</td><td class="good">H, M, PSA</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Penápolis</td><td class="good">H, M</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Pereira Barreto</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Piedade</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Pindamonhangaba</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Pirassununga</td><td class="good">H, M, PS¹</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Pontal</td><td class="good">H, M, PSA</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Porto Feliz</td><td class="good">H, M, PSA</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Presidente Venceslau</td><td class="good">H, PSA</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Ribeirão Preto</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Santa Fé do Sul</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - São Bento do Sapucaí</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - São Carlos</td><td class="good">H, M, PSA</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - São Joaquim da Barra</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - São José do Rio Preto</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - São José dos Campos</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Tatuí</td><td class="good">H, M</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Tietê</td><td class="good">H, M</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Tupã</td><td class="good">H, M</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Valinhos</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Vinhedo</td><td class="good">H, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa - Votuporanga</td><td class="good">H, M, PS¹</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa Batatais - Batatais</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa de Capão Bonito - Capão Bonito</td><td class="good">H, M, PSA</td></tr>
+<tr data-region="Interior - SP"><td>Sta Casa Dona Carolina Malheiros - São João da Boa Vista</td><td class="good">H, PS</td></tr>
+<tr data-region="Interior - SP"><td>Sta Filomena - Rio Claro</td><td class="good">H, M, PS</td></tr>
+<tr data-region="Interior - SP"><td>Unimed de Lorena - Lorena</td><td class="good">H, M, PA</td></tr>
+<tr data-region="Interior - SP"><td>Madre Theodora - Campinas - Campinas</td><td class="good">H, M, PS¹</td></tr>
+<tr data-region="Interior - SP"><td>Pitangueiras - Jundiaí - Jundiaí</td><td class="good">H, M, PS</td></tr>
+<tr class="region" data-region="Laboratórios"><td colspan="2">Laboratórios</td></tr>
+<tr data-region="Laboratórios"><td>A Frealdo</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Alpha</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Anaclin</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Analisys</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Anchieta</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Behring</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Bellato</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Bio Analise Emilio Ribas</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Bio Nuclear</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Bioclinica</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Biodiagnose</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Biolab</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Biolab Cerquilho</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Biolabor</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Biológico</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Bioquímica Lab - Brodowski</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Bragança</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>CAEC</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>CD Mauá</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Cedlab</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Cedlab - Tremembé</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Cellula Mater</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Celso Sia Simoes</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Cemedi</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Centerlab - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Central</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Centro de Diag Ribeirão Preto</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Centro de Imagem Rad</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Centrolab</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Cetam</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>CIM</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Cipax - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Citolab - Mogi Mirim</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Citologus</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Climaterium</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Clin Harmonia</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Clin Radiologica de Santos</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Clin Sao Pedro</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>CML</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Confiance</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>CRB Imagem</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Cytolab</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>DAC -SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Dasa</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Delboni Auriemo</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Delboni Auriemo - Guarulhos</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Deliberato</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Diagmed</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Diagnose Assis</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Dirceu Dalpino - Bauru</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>DMS Burnier</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Dr Edna - Indaiatuba</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Dr Leão de Moura</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Dr Tajara</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Duclin</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Ecorad - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Endomed</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Exame</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Foizer</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Gonzaga</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>HEMAT - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>HM</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>IACS</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>ICON</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>IDS</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>IDX</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Imedi - Santos</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Ipac</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Itapema</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Itulab</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>JM</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Jorge Eid</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Baracchini - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Barbosa &amp; Montagnana - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Biodoctor - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Biogen - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Biolabor - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Biomed - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Biotec - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Biotest - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab CCP - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab CEMIM - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab CEPAC - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Clinilab - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Deltha - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Dr Arnaldo Buainain - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Dr Lauro - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Estima - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Exame - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab FG - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Fugita - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Gauslab - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Hemolab - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab ICD - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab IPAT - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Itapetininga - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab João Paulo II</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Labersan - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Lemelab - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Maricondi - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Méthodo - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Mirassol</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Nakano</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Novo Horizonte - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Osvaldo Cruz - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Pasteur - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Paulista</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Paulista - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Roberto S. Nakata - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Romanini - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Sabin Birigui - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Santa Catarina - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Santa Maria - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Santa Paula - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab São Camilo Tupã - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab São João - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab São Paulo - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Sticca - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Tetsuo Mandai - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Vendramini - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lab Vitula - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Labac</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Labcenter - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Labclin - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Labor Med - Batatais</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Labor Saúde - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Laborati - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Laboratório Bioclínico</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Laboratorio Campos</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Laboratorio Santa Lucia</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Laboratorio São Roque</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Laborclin</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Laborclin Cruzeiro</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Laborjales - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Labormed</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Labortest</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>LACC</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lacpe</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Lavoisier - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>LSL</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Magna</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Marlene Spir</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Mega Imagem</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Menzen</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Miotello</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Mult Imagem - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Olavo Santos</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Oswaldo Cruz</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Oswaldo Cruz - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Pacca</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Padrão Ribeirão - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Pasteur Eurofins</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Personal - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Plani</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Precision</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Previlab</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Pro Exame</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Quantum - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>RCC</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Rio Claro</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Ruiz e Milare</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Sabin</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Sace - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Salomão e Zoppi</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Sancet</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>São Francisco</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>São José</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>São Judas Tadeu</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>São Lucas - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Saud-Imagem - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>SM Lab+</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Sodré - Bauru</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Souza Arêas</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Tomovale</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Unica</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Unilab</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Unilabor</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Unimagem</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Vale Clin - SP</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Vital Brazil</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Vitalabor</td><td class="good">LAB</td></tr>
+<tr data-region="Laboratórios"><td>Wk Diagnose</td><td class="good">LAB</td></tr></tbody></table></div></div>
+<script>
+const q=document.getElementById('q');
+const chips=document.getElementById('chips');
+const table=document.getElementById('t');
+const rows=[...table.querySelectorAll('tbody tr')];
+const regions=[...new Set(rows.filter(r=>r.classList.contains('region')).map(r=>r.dataset.region))];
+let activeRegion='';
+function renderChips(){
+  chips.innerHTML='';
+  const all=document.createElement('span');
+  all.className='badge'+(activeRegion===''?' active':'');
+  all.textContent='Todas as regiões';
+  all.onclick=()=>{activeRegion='';renderChips();filter()};
+  chips.appendChild(all);
+  regions.forEach(r=>{const b=document.createElement('span');b.className='badge'+(activeRegion===r?' active':'');b.textContent=r;b.onclick=()=>{activeRegion=activeRegion===r?'':r;renderChips();filter()};chips.appendChild(b)})
+}
+function filter(){
+  const txt=q.value.toLowerCase().trim();
+  let currentRegion='';
+  rows.forEach(r=>{
+    if(r.classList.contains('region')){currentRegion=r.dataset.region; r.classList.remove('hidden'); return;}
+    const hay=(r.innerText||'').toLowerCase();
+    const okText=!txt || hay.includes(txt);
+    const okRegion=!activeRegion || currentRegion===activeRegion;
+    r.classList.toggle('hidden', !(okText && okRegion));
+  });
+  rows.forEach(r=>{if(r.classList.contains('region')){const region=r.dataset.region; const hasVisible=rows.some(x=>!x.classList.contains('region') && x.dataset.region===region && !x.classList.contains('hidden')); r.classList.toggle('hidden', !hasVisible && activeRegion!==region)}})
+}
+q.addEventListener('input', filter);
+renderChips();
+filter();
+</script>
+</body></html>
